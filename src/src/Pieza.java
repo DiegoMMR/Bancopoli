@@ -9,7 +9,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
@@ -25,13 +24,13 @@ public class Pieza extends JLabel {
     //identifica la pieza
     private String key;
     
-    public Pieza(){
+    public Pieza(String key){
     
         this.key = key;
         this.setToolTipText(key);
         this.setSize (d);
         this.setPreferredSize(d);
-        this.setIcon(new ImageIcon(getClass().getResource("/img/disco 6.png")));
+        this.setIcon(new ImageIcon(getClass().getResource("/img/perro.png")));
         this.setText("");
         this.setVisible(true);
         this.setLocation(posicion);

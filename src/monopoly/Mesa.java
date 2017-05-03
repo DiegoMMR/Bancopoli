@@ -5,6 +5,11 @@
  */
 package monopoly;
 
+
+import java.awt.Point;
+import javax.swing.ImageIcon;
+import src.Cuadros;
+import src.Pieza;
 import src.Tablero;
 
 /**
@@ -13,17 +18,180 @@ import src.Tablero;
  */
 public class Mesa extends javax.swing.JFrame {
 
-    /**
+    
+   
+    
+/**
      * Creates new form Mesa
      */
+        private String src1;
+    private String src2;
+    private String src3;
+    private int seleccionJ1;
+    private int seleccionJ2;
+    private int seleccionJ3;
+    private int noJugadores;
+    
+    Pieza j1 = new Pieza("j1");
+    Pieza j2 = new Pieza("j2");
+    Pieza j3 = new Pieza("j3");
+        
+    
+     Cuadros _Cuadros = new Cuadros();
+    
+     private Point matriz[] = _Cuadros.getMatriz();
+     
     public Mesa() {
+        
         initComponents();
         
          //dibuja el tablero
+        
+        
+        //datos de prueba estos deben de ser pedidos al principio junto con la cantidad de jugadores
+        //1 es perro
+        //2 es carro
+        //3 es sombrero
+        seleccionJ1 = 1;
+        seleccionJ2 = 2;
+        seleccionJ3 = 3;
+        
+        noJugadores = 1;
+        
+        agregarPiezas();
+        
         Tablero imagen = new Tablero();
         jPanel1.add(imagen);
         jPanel1.repaint();
+    }
+    
+    //crea al jugador 1
+    public void agregarJ1()
+    {
+       
+       
+       
+            switch (seleccionJ1) {
+                case 1:
+                    src1 = "/img/perro.png";
+                    break;
+                case 2:
+                    src1 = "/img/carro.png";
+                    break;
+                case 3:
+                    src1 = "/img/sombrero.png";
+                    break;
+                default:
+                    break;
+            }
+
         
+        
+        
+        j1.setIcon(new ImageIcon(getClass().getResource(src1)));
+        j1.setLocation(_Cuadros.getInicio());
+        jPanel1.add(j1);
+        System.out.println("j1");
+    }
+    
+    //crea al jugador 2
+    public void agregarJ2()
+    {
+        System.out.println("j2");
+        
+       switch (seleccionJ2) {
+                case 1:
+                    src2 = "/img/perro.png";
+                    break;
+                case 2:
+                    src2 = "/img/carro.png";
+                    break;
+                case 3:
+                    src2 = "/img/sombrero.png";
+                    break;
+                default:
+                    break;
+            }
+        
+       
+        
+        j2.setIcon(new ImageIcon(getClass().getResource(src2)));
+        j2.setLocation(_Cuadros.getInicio());
+        jPanel1.add(j2);
+    }
+    
+    //crea al jugador 3
+    public void agregarJ3()
+    {
+        System.out.println("j3");
+        switch (seleccionJ3) {
+                case 1:
+                    src3 = "/img/perro.png";
+                    break;
+                case 2:
+                    src3 = "/img/carro.png";
+                    break;
+                case 3:
+                    src3 = "/img/sombrero.png";
+                    break;
+                default:
+                    break;
+            }
+        
+        
+        
+        j3.setIcon(new ImageIcon(getClass().getResource(src3)));
+        j3.setLocation(_Cuadros.getInicio());
+        jPanel1.add(j3);
+    }
+    
+    //agrega a los jugadores
+     public void agregarPiezas()
+    {
+        
+        
+            switch (noJugadores) {
+                case 1:
+                    agregarJ1();
+                    break;
+                case 2:
+                    agregarJ1();
+                    agregarJ2();
+                    break;
+                case 3:
+                    agregarJ1();
+                    agregarJ2();
+                    agregarJ3();
+                    break;
+                default:
+                    break;
+            }
+
+        jPanel1.repaint(); 
+    }
+    
+     //mueve la pieza dependiendo de la posicion del jugadro y el numero del dado
+     public void mover(int dado, Pieza jugador) {
+
+        int auxiliar = 0;
+
+        //busca la posicion de la pieza
+        for (int j = 0; j < 23; j++) {
+            
+            if (Point.distance(jugador.getLocation().x, jugador.getLocation().y, matriz[j].getLocation().x, matriz[j].getLocation().y) == 0) {
+                auxiliar = j;
+                break;
+            }
+        }
+
+        //aumenta la posicion de la matriz segun el dado
+        for (int i = dado; i > 0; i--) {
+            auxiliar++;
+
+        }
+        //mueve la pieza
+        jugador.setLocation(matriz[auxiliar]);
+
     }
 
     /**
@@ -58,6 +226,11 @@ public class Mesa extends javax.swing.JFrame {
         lblDado.setText("0");
 
         jButton1.setText("Tirar dado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,6 +263,19 @@ public class Mesa extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        //genera un numero aleatorio para el dado
+        int numeroAleatorio;
+
+        numeroAleatorio = (int) (Math.random() * 6 + 1);
+        lblDado.setText(String.valueOf(numeroAleatorio));
+
+        mover(numeroAleatorio, j1);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -16,8 +16,7 @@ import javax.swing.ImageIcon;
 public class Tablero extends javax.swing.JPanel {
     //agrega la imagen del trablero
         ImageIcon tablero = new ImageIcon(getClass().getResource("/img/tablero.png"));
-        //solo de prueba
-        ImageIcon perro = new ImageIcon(getClass().getResource("/img/perro.png"));
+        
     
     public Tablero() {
         this.setSize(910, 595); //se selecciona el tamaño del panel
@@ -35,8 +34,7 @@ public class Tablero extends javax.swing.JPanel {
 
 //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
         grafico.drawImage(tablero.getImage(), 0, 0, 910,595, null);
-        //solo de prueba
-        grafico.drawImage(perro.getImage(), _Cuadros.getIzabal().x, _Cuadros.getIzabal().y, 105,74, null);      
+       
         
         
         

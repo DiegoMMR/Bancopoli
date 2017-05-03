@@ -31,12 +31,22 @@ public class Cuadros {
     private Point bajaVerapaz = new Point(770,260);
     private Point empagua = new Point(770,365);
     private Point veCarcel = new Point(770,488);
-    private Point saquieCupon = new Point(665,488);
+    private Point saqueCupon = new Point(665,488);
     private Point santaRosa = new Point(560,488);
     private Point zacapa = new Point(455,488);
     private Point guatemala = new Point(350,488);
     private Point jutiapa = new Point(245,488);
     private Point sat2 = new Point(140,488);
+
+    
+    //define una matriz en orden del tablrero
+    private Point matriz[] = {inicio, huehue, xela, altaVerapaz, carcelPaso, quiche, izabal, peten, fegua, solola, sat1,
+                              descansoGratis, sanMarcos, bajaVerapaz, empagua, veCarcel, saqueCupon, santaRosa, zacapa,
+                              guatemala, jutiapa, sat2,inicio, huehue, xela, altaVerapaz, carcelPaso, quiche, izabal, peten};
+
+    public Point[] getMatriz() {return matriz;}
+    public void setMatriz(Point[] matriz) {this.matriz = matriz;}
+    
 
     
     
@@ -92,8 +102,8 @@ public class Cuadros {
     public Point getVeCarcel() {return veCarcel;}
     public void setVeCarcel(Point veCarcel) {this.veCarcel = veCarcel;}
 
-    public Point getSaquieCupon() {return saquieCupon;}
-    public void setSaquieCupon(Point saquieCupon) {this.saquieCupon = saquieCupon;}
+    public Point getSaquieCupon() {return saqueCupon;}
+    public void setSaquieCupon(Point saquieCupon) {this.saqueCupon = saquieCupon;}
 
     public Point getSantaRosa() {return santaRosa;}
     public void setSantaRosa(Point santaRosa) {this.santaRosa = santaRosa;}
