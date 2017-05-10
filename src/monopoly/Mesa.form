@@ -42,10 +42,24 @@
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblJugador2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblJugador1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblJugador3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblSaldoJugador1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSaldoJugador2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSaldoJugador3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,6 +77,23 @@
                       <Component id="lblDado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblJugador1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblJugador2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSaldoJugador2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblJugador3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSaldoJugador3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="lblSaldoJugador1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -116,6 +147,36 @@
     <Component class="javax.swing.JLabel" name="lblTurno">
       <Properties>
         <Property name="text" type="java.lang.String" value="#"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblJugador1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Jugador 1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblJugador2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Jugador 2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblJugador3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Jugador 3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSaldoJugador1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Q. ###.#"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSaldoJugador2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Q. ###.#"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSaldoJugador3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Q. ###.#"/>
       </Properties>
     </Component>
   </SubComponents>

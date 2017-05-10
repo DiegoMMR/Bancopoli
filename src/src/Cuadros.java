@@ -47,7 +47,7 @@ public class Cuadros {
     public Point[] getMatriz() {return matriz;}
     public void setMatriz(Point[] matriz) {this.matriz = matriz;}
     
-
+    
     
     
     public Point getInicio() {return inicio;}
@@ -102,8 +102,8 @@ public class Cuadros {
     public Point getVeCarcel() {return veCarcel;}
     public void setVeCarcel(Point veCarcel) {this.veCarcel = veCarcel;}
 
-    public Point getSaquieCupon() {return saqueCupon;}
-    public void setSaquieCupon(Point saquieCupon) {this.saqueCupon = saquieCupon;}
+    public Point getSaqueCupon() {return saqueCupon;}
+    public void setSaqueCupon(Point saquieCupon) {this.saqueCupon = saquieCupon;}
 
     public Point getSantaRosa() {return santaRosa;}
     public void setSantaRosa(Point santaRosa) {this.santaRosa = santaRosa;}

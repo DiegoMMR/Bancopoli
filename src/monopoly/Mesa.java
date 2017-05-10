@@ -6,11 +6,10 @@
 package monopoly;
 
 
-import java.awt.Point;
-import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 import src.Cuadros;
-import src.Pieza;
+import src.Jugador;
 import src.Tablero;
 
 /**
@@ -25,25 +24,25 @@ public class Mesa extends javax.swing.JFrame {
 /**
      * Creates new form Mesa
      */
-        private String src1;
-    private String src2;
-    private String src3;
-    private int seleccionJ1;
-    private int seleccionJ2;
-    private int seleccionJ3;
-    private int noJugadores;
+   
     private int turno = 1;
+    private int noJugadores;
     
-    Pieza j1 = new Pieza("j1");
-    Pieza j2 = new Pieza("j2");
-    Pieza j3 = new Pieza("j3");
+    Jugador j1;
+    Jugador j2;
+    Jugador j3;
         
     
      Cuadros _Cuadros = new Cuadros();
     
-     private Point matriz[] = _Cuadros.getMatriz();
+   
      
     public Mesa() {
+        
+        //crea los jugadores
+        this.j3 = new Jugador("Jugador 3");
+        this.j2 = new Jugador("Jugador 2");
+        this.j1 = new Jugador("Jugador 1");
         
         initComponents();
         
@@ -52,26 +51,46 @@ public class Mesa extends javax.swing.JFrame {
         
         lblTurno.setText(String.valueOf(turno));
         
+        
+        
        //mensaje para seleccion de cuantos jugadores hay
        noJugadores = Integer.valueOf(JOptionPane.showInputDialog("¿Cantidad de jugadores?"));
          
        //hace a los jugadores seleccionar piezas
-       switch (noJugadores) {
-                case 1:
-                    seleccionJ1 = Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero"));
-                    break;
-                case 2:
-                    seleccionJ1 = Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero"));
-                    seleccionJ2 = Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 2? \n 1. Perro \n 2. Carro \n 3. Sombrero"));
-                    break;
-                case 3:
-                    seleccionJ1 = Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero"));
-                    seleccionJ2 = Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 2? \n 1. Perro \n 2. Carro \n 3. Sombrero"));
-                    seleccionJ3 = Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 3? \n 1. Perro \n 2. Carro \n 3. Sombrero"));
-                    break;
-                default:
-                    break;
-            } 
+        switch (noJugadores) {
+            case 1:
+                j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
+                //llena los labes a usar
+                lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
+                
+                //vacia los labes a usar
+                lblSaldoJugador2.setText("");
+                lblJugador2.setText("");
+                lblSaldoJugador3.setText("");
+                lblJugador3.setText("");
+                break;
+            case 2:
+                j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
+                j2.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
+
+                lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
+                lblSaldoJugador2.setText("Q. " + String.valueOf(j2.getSaldo()));
+
+                lblSaldoJugador3.setText("");
+                lblJugador3.setText("");
+                break;
+            case 3:
+                j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
+                j2.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
+                j3.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
+
+                lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
+                lblSaldoJugador2.setText("Q. " + String.valueOf(j2.getSaldo()));
+                lblSaldoJugador3.setText("Q. " + String.valueOf(j3.getSaldo()));
+                break;
+            default:
+                break;
+        }
               
         
         agregarPiezas();
@@ -86,88 +105,25 @@ public class Mesa extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Turno Jugador " + turno);
     }
     
-    //crea al jugador 1
-    public void agregarJ1() {
-        switch (seleccionJ1) {
-            case 1:
-                src1 = "/img/perro.png";
-                break;
-            case 2:
-                src1 = "/img/carro.png";
-                break;
-            case 3:
-                src1 = "/img/sombrero.png";
-                break;
-            default:
-                break;
-        }
-
-        j1.setIcon(new ImageIcon(getClass().getResource(src1)));
-        j1.setLocation(_Cuadros.getInicio());
-        jPanel1.add(j1);
-        System.out.println("j1");
-    }
-
-    //crea al jugador 2
-    public void agregarJ2() {
-       
-
-        switch (seleccionJ2) {
-            case 1:
-                src2 = "/img/perro.png";
-                break;
-            case 2:
-                src2 = "/img/carro.png";
-                break;
-            case 3:
-                src2 = "/img/sombrero.png";
-                break;
-            default:
-                break;
-        }
-
-        j2.setIcon(new ImageIcon(getClass().getResource(src2)));
-        j2.setLocation(_Cuadros.getInicio());
-        jPanel1.add(j2);
-    }
-
-    //crea al jugador 3
-    public void agregarJ3() {
-
-        switch (seleccionJ3) {
-            case 1:
-                src3 = "/img/perro.png";
-                break;
-            case 2:
-                src3 = "/img/carro.png";
-                break;
-            case 3:
-                src3 = "/img/sombrero.png";
-                break;
-            default:
-                break;
-        }
-
-        j3.setIcon(new ImageIcon(getClass().getResource(src3)));
-        j3.setLocation(_Cuadros.getInicio());
-        jPanel1.add(j3);
-    }
     
+    
+   
     //agrega a los jugadores
     public void agregarPiezas() {
 
         switch (noJugadores) {
             case 1:
-                agregarJ1();
+                j1.agregar(jPanel1);
+                
                 break;
             case 2:
-                agregarJ1();
-                agregarJ2();
+                j1.agregar(jPanel1);
+                j2.agregar(jPanel1);
                 break;
             case 3:
-                agregarJ1();
-                agregarJ2();
-                agregarJ3();
+                j1.agregar(jPanel1);
+                j2.agregar(jPanel1);
+                j3.agregar(jPanel1);
                 break;
             default:
                 break;
@@ -176,29 +132,7 @@ public class Mesa extends javax.swing.JFrame {
         jPanel1.repaint();
     }
     
-     //mueve la pieza dependiendo de la posicion del jugadro y el numero del dado
-    public void mover(int dado, Pieza jugador) {
-
-        int auxiliar = 0;
-
-        //busca la posicion de la pieza
-        for (int j = 0; j < 23; j++) {
-
-            if (Point.distance(jugador.getLocation().x, jugador.getLocation().y, matriz[j].getLocation().x, matriz[j].getLocation().y) == 0) {
-                auxiliar = j;
-                break;
-            }
-        }
-
-        //aumenta la posicion de la matriz segun el dado
-        for (int i = dado; i > 0; i--) {
-            auxiliar++;
-
-        }
-        //mueve la pieza
-        jugador.setLocation(matriz[auxiliar]);
-
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -214,6 +148,12 @@ public class Mesa extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblTurno = new javax.swing.JLabel();
+        lblJugador1 = new javax.swing.JLabel();
+        lblJugador2 = new javax.swing.JLabel();
+        lblJugador3 = new javax.swing.JLabel();
+        lblSaldoJugador1 = new javax.swing.JLabel();
+        lblSaldoJugador2 = new javax.swing.JLabel();
+        lblSaldoJugador3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -244,6 +184,18 @@ public class Mesa extends javax.swing.JFrame {
 
         lblTurno.setText("#");
 
+        lblJugador1.setText("Jugador 1");
+
+        lblJugador2.setText("Jugador 2");
+
+        lblJugador3.setText("Jugador 3");
+
+        lblSaldoJugador1.setText("Q. ###.#");
+
+        lblSaldoJugador2.setText("Q. ###.#");
+
+        lblSaldoJugador3.setText("Q. ###.#");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,8 +215,19 @@ public class Mesa extends javax.swing.JFrame {
                                 .addComponent(lblDado))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
-                                .addComponent(jButton1)))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblJugador2)
+                                    .addComponent(lblJugador1)
+                                    .addComponent(lblJugador3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSaldoJugador1)
+                                    .addComponent(lblSaldoJugador2)
+                                    .addComponent(lblSaldoJugador3))))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +241,20 @@ public class Mesa extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblJugador1)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblJugador2)
+                                    .addComponent(lblSaldoJugador2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblJugador3)
+                                    .addComponent(lblSaldoJugador3)))
+                            .addComponent(lblSaldoJugador1)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
@@ -289,23 +265,20 @@ public class Mesa extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //genera un numero aleatorio para el dado
-        int numeroAleatorio;
+        int dado;
 
-        numeroAleatorio = (int) (Math.random() * 6 + 1);
-        lblDado.setText(String.valueOf(numeroAleatorio));
+        dado = (int) (Math.random() * 6 + 1);
+        lblDado.setText(String.valueOf(dado));
       
         //mueve dependiendo del turno en curso        
-        if (turno == 3) {
-            System.out.println("3");
-            mover(numeroAleatorio, j3);
+        if (turno == 3) {            
+            j3.mover(dado, lblSaldoJugador3);
             turno++;
-        } else if (turno == 2) {
-            System.out.println("2");
-            mover(numeroAleatorio, j2);
+        } else if (turno == 2) {            
+            j2.mover(dado, lblSaldoJugador2);
             turno++;
         } else if (turno == 1) {
-            System.out.println("1");
-            mover(numeroAleatorio, j1);
+            j1.mover(dado, lblSaldoJugador1);
             turno++;
         }
         
@@ -362,6 +335,12 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDado;
+    private javax.swing.JLabel lblJugador1;
+    private javax.swing.JLabel lblJugador2;
+    private javax.swing.JLabel lblJugador3;
+    private javax.swing.JLabel lblSaldoJugador1;
+    private javax.swing.JLabel lblSaldoJugador2;
+    private javax.swing.JLabel lblSaldoJugador3;
     private javax.swing.JLabel lblTurno;
     // End of variables declaration//GEN-END:variables
 }
