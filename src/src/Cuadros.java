@@ -121,5 +121,4 @@ public class Cuadros {
     public void setSat2(Point sat2) {this.sat2 = sat2;}
     
     
-    
 }

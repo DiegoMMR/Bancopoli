@@ -27,9 +27,6 @@ public class Tablero extends javax.swing.JPanel {
     public void paint(Graphics grafico) {
         Dimension height = getSize();
 
-        Cuadros _Cuadros = new Cuadros();
-        
-//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
         
 
 //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel

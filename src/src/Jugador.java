@@ -88,6 +88,7 @@ public class Jugador {
         
         
         //calcula si puede pasar la salida para poder sumar 100 al saldo
+        if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getSaqueCupon().getLocation().x,  _Cuadros.getSaqueCupon().getLocation().y) == 0 && dado > 6){this.setSaldo(this.saldo + 100);}
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getSantaRosa().getLocation().x,  _Cuadros.getSantaRosa().getLocation().y) == 0 && dado > 5){this.setSaldo(this.saldo + 100);}
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getZacapa().getLocation().x,_Cuadros.getZacapa().getLocation().y) == 0 && dado > 4){this.setSaldo(this.saldo + 100);}
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getGuatemala().getLocation().x, _Cuadros.getGuatemala().getLocation().y) == 0 && dado > 2){this.setSaldo(this.saldo + 100);}
@@ -101,6 +102,7 @@ public class Jugador {
         }
         //mueve la pieza
         this._Pieza.setLocation(matriz[auxiliar]);
+        
         //si la pieza cae en el inicio se le suman 100 al saldo para poder sumar 200 si cae en la casiila
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getInicio().getLocation().x, _Cuadros.getInicio().getLocation().y) == 0) {
             this.setSaldo(this.saldo + 100);

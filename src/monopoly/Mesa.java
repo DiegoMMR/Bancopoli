@@ -101,6 +101,7 @@ public class Mesa extends javax.swing.JFrame {
         jPanel1.add(imagen);
         jPanel1.repaint();
         
+        
         //muestra mensaje de a quien le toca
         JOptionPane.showMessageDialog(null, "Turno Jugador " + turno);
     }
