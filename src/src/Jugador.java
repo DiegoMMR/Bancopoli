@@ -146,37 +146,69 @@ public class Jugador {
          //Se envia a la carcel y paga Q100
         if (auxiliar == 15) {
             JOptionPane.showMessageDialog(null, "Ve a la carcel y paga Q100 ");
-            this.setSaldo(this.saldo - 100);
             this._Pieza.setLocation(matriz[4]);
             auxiliar = 4;
+             //valida si le alcanza para pagar
+                if(this.getSaldo() >= 100)
+                {
+                this.setSaldo(this.saldo - 100);
+                //si no le alcanza lo pone en bancarrota
+                }else
+                {
+                    this.setBancarrota(true);
+                }
         }
         //Al caer en cupones se genera un numero aleatorio que representa cada cupon
         if (auxiliar == 16) {
-            int cuponNum = (int) (Math.random() * 5 + 1);
+            int cuponNum = (int) (Math.random() * 1 + 1);
             switch (cuponNum){
                 case 1:  cuponNum = 1;
-                    JOptionPane.showMessageDialog(null, "Haz ganado un bono de Q100");
+                    JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q. 50.00 de peaje");
+                    this.setSaldo(this.saldo - 50);
+                    JOptionPane.showMessageDialog(null, "Haz pasado por la salida, recibes Q100");
                     this.setSaldo(this.saldo + 100);
                     break;
                 case 2:  cuponNum = 2;
-                    JOptionPane.showMessageDialog(null, "Haz ganado un bono de Q500");
-                    this.setSaldo(this.saldo + 500);
+                    JOptionPane.showMessageDialog(null, "Pague Q. 150.00 a la SAT por multa sobre declaración de impuestos");
+                    //valida si le alcanza para pagar
+                    if(this.getSaldo() >= 150)
+                    {
+                        this.setSaldo(this.saldo - 150);
+                    //si no le alcanza lo pone en bancarrota
+                    }else
+                    {
+                        this.setBancarrota(true);
+                    }
                     break;
                 case 3:  cuponNum = 3;
-                    JOptionPane.showMessageDialog(null, "Debes pagar impuestos extra por un monto de Q100");
-                    this.setSaldo(this.saldo - 100);
-                    break;
-                case 4:  cuponNum = 4;
-                    JOptionPane.showMessageDialog(null, "Ve a la carcel");
-                    this.setSaldo(this.saldo - 100);
+                    JOptionPane.showMessageDialog(null, "Vaya directo a la cárcel, no pase por la entrada y pague Q100");
                     this._Pieza.setLocation(matriz[4]);
                     auxiliar = 4;
+                    //valida si le alcanza para pagar
+                    if(this.getSaldo() >= 100)
+                    {
+                        this.setSaldo(this.saldo - 100);
+                    //si no le alcanza lo pone en bancarrota
+                    }else
+                    {
+                        this.setBancarrota(true);
+                    }
+                    break;
+                case 4:  cuponNum = 4;
+                    JOptionPane.showMessageDialog(null, "Pague Q. 100.00 al dueño de Empagua");
+                    _Casillas.caer(this, 14, matrizC);
+                    this.cantidadAPagar = 100;
+                    this.jugadorAPagar = _Casillas.getJugadorAPagar();
+                    this._Pieza.setLocation(matriz[16]);
+                    auxiliar = 16;
                     break;
                 case 5:  cuponNum = 5;
-                    JOptionPane.showMessageDialog(null, "Ve al inicio y cobra Q100");
-                    this.setSaldo(this.saldo + 100);
-                    this._Pieza.setLocation(matriz[0]);
-                    auxiliar = 0;
+                    JOptionPane.showMessageDialog(null, "Pague Q. 100.00 al dueño de Fegua");
+                    _Casillas.caer(this, 8, matrizC);
+                    this.cantidadAPagar = 100;
+                    this.jugadorAPagar = _Casillas.getJugadorAPagar();
+                    this._Pieza.setLocation(matriz[16]);
+                    auxiliar = 16;
                     break;
                 default: break;
             }

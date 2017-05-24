@@ -353,7 +353,6 @@ public class Mesa extends javax.swing.JFrame {
 
         dado = (int) (Math.random() * 6 + 1);
         
-        
         lblDado.setText(String.valueOf(dado));
       
         //mueve dependiendo del turno en curso
