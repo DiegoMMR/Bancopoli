@@ -97,7 +97,7 @@ public class Jugador {
     }
     
     //mueve la pueza segun el dado
-    public void mover(int dado, JLabel saldo, Casilla matrizC[], double cantidadAPagar, String jugadorAPagar) {
+    public void mover(int dado, JLabel saldo, Casilla matrizC[]) {
 
         int auxiliar = 0;
         
@@ -137,10 +137,10 @@ public class Jugador {
         
         _Casillas.caer(this, auxiliar, matrizC);
         
-        cantidadAPagar = _Casillas.getCantidadAPagar();
-        jugadorAPagar = _Casillas.getJugadorAPagar();
+        this.cantidadAPagar = _Casillas.getCantidadAPagar();
+        this.jugadorAPagar = _Casillas.getJugadorAPagar();
           
-         System.out.println("Cantidad a pagar jugador: " + cantidadAPagar);
+         System.out.println("Cantidad a pagar jugador: " + this.cantidadAPagar);
         
         saldo.setText("Q. " + String.valueOf(this.saldo));
         

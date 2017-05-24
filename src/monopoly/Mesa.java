@@ -7,6 +7,7 @@ package monopoly;
 
 
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import src.Casilla;
 import src.Casillas;
@@ -33,6 +34,7 @@ public class Mesa extends javax.swing.JFrame {
     private double cantidadAPagar = 0;
     private Casillas _Casillas = new Casillas();
     private Casilla matriz[] = _Casillas.getMatriz();
+    private ArrayList<Jugador> listaJugadores = new ArrayList<Jugador>();
     
     Jugador j1;
     Jugador j2;
@@ -41,7 +43,7 @@ public class Mesa extends javax.swing.JFrame {
     
      Cuadros _Cuadros = new Cuadros();
     
-   
+     
      
     public Mesa() {
         
@@ -49,6 +51,8 @@ public class Mesa extends javax.swing.JFrame {
         this.j3 = new Jugador("Jugador 3");
         this.j2 = new Jugador("Jugador 2");
         this.j1 = new Jugador("Jugador 1");
+        
+        
         
         initComponents();
         
@@ -74,6 +78,8 @@ public class Mesa extends javax.swing.JFrame {
                 lblJugador2.setText("");
                 lblSaldoJugador3.setText("");
                 lblJugador3.setText("");
+                
+               
                 break;
             case 2:
                 j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
@@ -84,6 +90,8 @@ public class Mesa extends javax.swing.JFrame {
 
                 lblSaldoJugador3.setText("");
                 lblJugador3.setText("");
+                
+                
                 break;
             case 3:
                 j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
@@ -93,6 +101,10 @@ public class Mesa extends javax.swing.JFrame {
                 lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
                 lblSaldoJugador2.setText("Q. " + String.valueOf(j2.getSaldo()));
                 lblSaldoJugador3.setText("Q. " + String.valueOf(j3.getSaldo()));
+                
+                listaJugadores.add(j1);
+                listaJugadores.add(j2);
+                listaJugadores.add(j3);
                 break;
             default:
                 break;
@@ -122,15 +134,23 @@ public class Mesa extends javax.swing.JFrame {
             case 1:
                 j1.agregar(jPanel1);
                 
+                 listaJugadores.add(j1);
                 break;
             case 2:
                 j1.agregar(jPanel1);
                 j2.agregar(jPanel1);
+                
+                listaJugadores.add(j1);
+                listaJugadores.add(j2);
                 break;
             case 3:
                 j1.agregar(jPanel1);
                 j2.agregar(jPanel1);
                 j3.agregar(jPanel1);
+                
+                listaJugadores.add(j1);
+                listaJugadores.add(j2);
+                listaJugadores.add(j3);
                 break;
             default:
                 break;
@@ -141,13 +161,28 @@ public class Mesa extends javax.swing.JFrame {
     
     public void actualizarSaldos(){
         
-        String jugador1 = String.valueOf(j1.getSaldo());
-        String jugador2 = String.valueOf(j2.getSaldo());
-        String jugador3 = String.valueOf(j3.getSaldo());
+       if(noJugadores == 3)
+       {
+        String jugador1 = String.valueOf(listaJugadores.get(0).getSaldo());
+        String jugador2 = String.valueOf(listaJugadores.get(1).getSaldo());
+        String jugador3 = String.valueOf(listaJugadores.get(2).getSaldo());
         
         lblSaldoJugador1.setText("Q. " + jugador1);
         lblSaldoJugador2.setText("Q. " + jugador2);
         lblSaldoJugador3.setText("Q. " + jugador3);
+       }
+       
+       if(noJugadores == 2)
+       {
+        String jugador1 = String.valueOf(listaJugadores.get(0).getSaldo());
+        String jugador2 = String.valueOf(listaJugadores.get(1).getSaldo());
+        
+        lblSaldoJugador1.setText("Q. " + jugador1);
+        lblSaldoJugador2.setText("Q. " + jugador2);
+       }
+       
+        
+       
     }
 
     /**
@@ -278,56 +313,103 @@ public class Mesa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void bancarrota(Jugador j)
+    {
+        if (j.isBancarrota() == true)
+        {
+            listaJugadores.remove(j);
+            
+            //si un jugador pierde desaparece sus datos
+        if("Jugador 3".equals(j.getNombre()))
+        {
+             lblSaldoJugador3.setText("");
+            lblJugador3.setText("");
+        }
+        
+        if("Jugador 2".equals(j.getNombre()))
+        {
+             lblSaldoJugador2.setText("");
+             lblJugador2.setText("");
+        }
+        if("Jugador 1".equals(j.getNombre()))
+        {
+             lblSaldoJugador1.setText("");
+             lblJugador1.setText("");
+        }
+        
+        noJugadores--;
+        
+        }
+        
+        
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        
+        
         //genera un numero aleatorio para el dado
         int dado;
 
-        //dado = (int) (Math.random() * 6 + 1);
-        dado = 5;
+        dado = (int) (Math.random() * 6 + 1);
+        
         
         lblDado.setText(String.valueOf(dado));
       
         //mueve dependiendo del turno en curso
         switch (turno) {
             case 3:
-                j3.mover(dado, lblSaldoJugador3, matriz,cantidadAPagar ,jugadorAPagar);
+                listaJugadores.get(turno-1).mover(dado, lblSaldoJugador3, matriz);
+                cantidadAPagar = listaJugadores.get(turno-1).getCantidadAPagar();
+                jugadorAPagar = listaJugadores.get(turno-1).getJugadorAPagar();
                 turno++;
                 break;
             case 2:
-                j2.mover(dado, lblSaldoJugador2, matriz,cantidadAPagar ,jugadorAPagar);
+                listaJugadores.get(turno-1).mover(dado, lblSaldoJugador2, matriz);
+                cantidadAPagar = listaJugadores.get(turno-1).getCantidadAPagar();
+                jugadorAPagar = listaJugadores.get(turno-1).getJugadorAPagar();
                 turno++;
                 break;
             case 1:
-                j1.mover(dado, lblSaldoJugador1, matriz,cantidadAPagar ,jugadorAPagar);
+                listaJugadores.get(turno-1).mover(dado, lblSaldoJugador1, matriz);
+                cantidadAPagar = listaJugadores.get(turno-1).getCantidadAPagar();
+                jugadorAPagar = listaJugadores.get(turno-1).getJugadorAPagar();
                 turno++;
                 break;
             default:
                 break;
         }
         
-        
+        bancarrota(listaJugadores.get(turno-2));
+        if(listaJugadores.size() == 1)
+        {
+            JOptionPane.showMessageDialog(null, "Juego terminado");
+            JOptionPane.showMessageDialog(null, "Ganador: \n" + listaJugadores.get(0).getNombre());
+            System.exit(0);
+        }
         
         System.out.println("Cantidad a pagar mesa: " + cantidadAPagar);
+        
         
         //para cambiar el saldo del jugador a pagar
         if (cantidadAPagar != 0)
         {
             if ("Jugador 3".equals(jugadorAPagar)) {  
-            double saldo = j3.getSaldo() + cantidadAPagar;
-            j3.setSaldo(saldo);
+            double saldo2 = j3.getSaldo() + cantidadAPagar;
+            j3.setSaldo(saldo2);
             System.out.println("pagar a 3");
         } else if ("Jugador 2".equals(jugadorAPagar)) {            
-            double saldo = j2.getSaldo() + cantidadAPagar;
-            j2.setSaldo(saldo);
+            double saldo2 = j2.getSaldo() + cantidadAPagar;
+            j2.setSaldo(saldo2);
             System.out.println("pagar a 2");
         } else if ("Jugador 1".equals(jugadorAPagar)) {
-            double saldo = j3.getSaldo() + cantidadAPagar;
-            j2.setSaldo(saldo);
+            double saldo2 = j1.getSaldo() + cantidadAPagar;
+            j1.setSaldo(saldo2);
             System.out.println("pagar a 1");
         }
             actualizarSaldos();
             cantidadAPagar = 0;
+            jugadorAPagar = "";
             
         }
         
