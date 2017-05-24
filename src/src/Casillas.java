@@ -36,8 +36,8 @@ public class Casillas {
     public Casilla jutiapa = new Casilla(270,_Cuadros.getJutiapa(),"Jutiapa");
     public Casilla sat2 = new Casilla(0.1,_Cuadros.getSat2(),"Sat");
     
-    public double cantidadAPagar;
-    public String jugadorAPagar;
+    private double cantidadAPagar;
+    private String jugadorAPagar;
     
     //matriz con mismas posiciones que las de cuadros para facilitar el manejo de posiciones en la mesa
     public Casilla matriz[] = {null, huehue, xela, altaVerapaz, null, quiche, izabal, peten, fegua, solola, sat1,
@@ -62,8 +62,8 @@ public class Casillas {
 
         Casilla _Casilla = matriz[posicion];
         
-       cantidadAPagar = 0;
-       jugadorAPagar = "";  
+       this.cantidadAPagar = 0;
+       this.jugadorAPagar = "";  
         
         if (_Casilla != null) {
             
@@ -80,22 +80,22 @@ public class Casillas {
                 //muesta mendaje de a quien y cuanto se le debe pagar
                 JOptionPane.showMessageDialog(null, _Casilla.getNombre() + " es de " + _Casilla.getsDueño() + " y debes de pagarle Q. " + _Casilla.getAlquiler());
                 
-               cantidadAPagar = _Casilla.getAlquiler();
-               jugadorAPagar = _Casilla.getsDueño();  
+               this.cantidadAPagar = _Casilla.getAlquiler();
+               this.jugadorAPagar = _Casilla.getsDueño();  
                 
                 //valida si le alcanza para pagar
-                if(_Jugador.getSaldo() > cantidadAPagar)
+                if(_Jugador.getSaldo() > this.cantidadAPagar)
                 {
-                double saldo = _Jugador.getSaldo() - cantidadAPagar;
+                double saldo = _Jugador.getSaldo() - this.cantidadAPagar;
                 _Jugador.setSaldo(saldo);
                 //si no le alcanza lo pone en bancarrota
                 }else
                 {
-                    cantidadAPagar = _Jugador.getSaldo();
+                    this.cantidadAPagar = _Jugador.getSaldo();
                     _Jugador.setBancarrota(true);
                 }
                 
-                System.out.println("Cantidad a pagar casilla: " + cantidadAPagar);
+                System.out.println("Cantidad a pagar casilla: " +this.cantidadAPagar);
             }
             
             //si la casilla esta al noombre del que esta en turno 
@@ -163,9 +163,7 @@ public class Casillas {
             }
 
         }
-        
-       this.cantidadAPagar = cantidadAPagar = 0;
-       this.jugadorAPagar = jugadorAPagar = "";  
+         
         
     }
     
