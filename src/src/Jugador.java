@@ -8,6 +8,7 @@ package src;
 import java.awt.Point;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -142,6 +143,12 @@ public class Jugador {
           
          System.out.println("Cantidad a pagar jugador: " + this.cantidadAPagar);
         
+        if (auxiliar == 15) {
+            JOptionPane.showMessageDialog(null, "Haz caido en la carcel, regresa y paga Q100");
+            this.setSaldo(this.saldo - 100);
+            this._Pieza.setLocation(matriz[4]);
+            auxiliar = 4;
+        }
         saldo.setText("Q. " + String.valueOf(this.saldo));
         
       
