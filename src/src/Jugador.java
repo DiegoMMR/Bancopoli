@@ -25,7 +25,20 @@ public class Jugador {
     private final String sombrero = "/img/sombrero.png";
     private String aux;
     private final Cuadros _Cuadros;
+    private final Casillas _Casillas;
     private final Point matriz[];
+    private String nombre;
+    private boolean bancarrota;
+    
+    public double cantidadAPagar;
+    public String jugadorAPagar;
+    
+    
+    public double getCantidadAPagar() {return cantidadAPagar;}
+    public void setCantidadAPagar(double cantidadAPagar) {this.cantidadAPagar = cantidadAPagar;}
+
+    public String getJugadorAPagar() {return jugadorAPagar;}
+    public void setJugadorAPagar(String jugadorAPagar) {this.jugadorAPagar = jugadorAPagar;}
     
     public Jugador (String jugador)
     {
@@ -35,9 +48,20 @@ public class Jugador {
         this.valorPropiedadoes = 0;
         this.seleccion = 0;
         this.matriz = this._Cuadros.getMatriz();
+        this.nombre = jugador;
+        this._Casillas = new Casillas();
+        this.bancarrota = false;
         
     }
 
+    public boolean isBancarrota() {return bancarrota;}
+    public void setBancarrota(boolean bancarrota) {this.bancarrota = bancarrota;}
+
+    
+    
+    public String getNombre() {return nombre;}
+    public void setNombre(String nombre) {this.nombre = nombre;}    
+    
     public Pieza getPieza() {return _Pieza;}
     public void setPieza(Pieza _Pieza) {this._Pieza = _Pieza;}
 
@@ -73,10 +97,10 @@ public class Jugador {
     }
     
     //mueve la pueza segun el dado
-    public void mover(int dado, JLabel saldo) {
+    public void mover(int dado, JLabel saldo, Casilla matrizC[], double cantidadAPagar, String jugadorAPagar) {
 
         int auxiliar = 0;
-
+        
         //busca la posicion de la pieza
         for (int j = 0; j < 23; j++) {
 
@@ -87,6 +111,7 @@ public class Jugador {
         }
         
         
+                
         //calcula si puede pasar la salida para poder sumar 100 al saldo
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getSaqueCupon().getLocation().x,  _Cuadros.getSaqueCupon().getLocation().y) == 0 && dado > 6){this.setSaldo(this.saldo + 100);}
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getSantaRosa().getLocation().x,  _Cuadros.getSantaRosa().getLocation().y) == 0 && dado > 5){this.setSaldo(this.saldo + 100);}
@@ -107,10 +132,22 @@ public class Jugador {
         if (Point.distance(this._Pieza.getLocation().x, this._Pieza.getLocation().y, _Cuadros.getInicio().getLocation().x, _Cuadros.getInicio().getLocation().y) == 0) {
             this.setSaldo(this.saldo + 100);
 
-        }
+        }        
+        
+        
+        _Casillas.caer(this, auxiliar, matrizC);
+        
+        cantidadAPagar = _Casillas.getCantidadAPagar();
+        jugadorAPagar = _Casillas.getJugadorAPagar();
+          
+         System.out.println("Cantidad a pagar jugador: " + cantidadAPagar);
         
         saldo.setText("Q. " + String.valueOf(this.saldo));
+        
+      
+        
     }
+    
     
     
 }

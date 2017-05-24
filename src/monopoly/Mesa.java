@@ -8,6 +8,8 @@ package monopoly;
 
 
 import javax.swing.JOptionPane;
+import src.Casilla;
+import src.Casillas;
 import src.Cuadros;
 import src.Jugador;
 import src.Tablero;
@@ -27,6 +29,10 @@ public class Mesa extends javax.swing.JFrame {
    
     private int turno = 1;
     private int noJugadores;
+    private String jugadorAPagar;
+    private double cantidadAPagar = 0;
+    private Casillas _Casillas = new Casillas();
+    private Casilla matriz[] = _Casillas.getMatriz();
     
     Jugador j1;
     Jugador j2;
@@ -133,7 +139,16 @@ public class Mesa extends javax.swing.JFrame {
         jPanel1.repaint();
     }
     
-    
+    public void actualizarSaldos(){
+        
+        String jugador1 = String.valueOf(j1.getSaldo());
+        String jugador2 = String.valueOf(j2.getSaldo());
+        String jugador3 = String.valueOf(j3.getSaldo());
+        
+        lblSaldoJugador1.setText("Q. " + jugador1);
+        lblSaldoJugador2.setText("Q. " + jugador2);
+        lblSaldoJugador3.setText("Q. " + jugador3);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -268,19 +283,52 @@ public class Mesa extends javax.swing.JFrame {
         //genera un numero aleatorio para el dado
         int dado;
 
-        dado = (int) (Math.random() * 6 + 1);
+        //dado = (int) (Math.random() * 6 + 1);
+        dado = 5;
+        
         lblDado.setText(String.valueOf(dado));
       
-        //mueve dependiendo del turno en curso        
-        if (turno == 3) {            
-            j3.mover(dado, lblSaldoJugador3);
-            turno++;
-        } else if (turno == 2) {            
-            j2.mover(dado, lblSaldoJugador2);
-            turno++;
-        } else if (turno == 1) {
-            j1.mover(dado, lblSaldoJugador1);
-            turno++;
+        //mueve dependiendo del turno en curso
+        switch (turno) {
+            case 3:
+                j3.mover(dado, lblSaldoJugador3, matriz,cantidadAPagar ,jugadorAPagar);
+                turno++;
+                break;
+            case 2:
+                j2.mover(dado, lblSaldoJugador2, matriz,cantidadAPagar ,jugadorAPagar);
+                turno++;
+                break;
+            case 1:
+                j1.mover(dado, lblSaldoJugador1, matriz,cantidadAPagar ,jugadorAPagar);
+                turno++;
+                break;
+            default:
+                break;
+        }
+        
+        
+        
+        System.out.println("Cantidad a pagar mesa: " + cantidadAPagar);
+        
+        //para cambiar el saldo del jugador a pagar
+        if (cantidadAPagar != 0)
+        {
+            if ("Jugador 3".equals(jugadorAPagar)) {  
+            double saldo = j3.getSaldo() + cantidadAPagar;
+            j3.setSaldo(saldo);
+            System.out.println("pagar a 3");
+        } else if ("Jugador 2".equals(jugadorAPagar)) {            
+            double saldo = j2.getSaldo() + cantidadAPagar;
+            j2.setSaldo(saldo);
+            System.out.println("pagar a 2");
+        } else if ("Jugador 1".equals(jugadorAPagar)) {
+            double saldo = j3.getSaldo() + cantidadAPagar;
+            j2.setSaldo(saldo);
+            System.out.println("pagar a 1");
+        }
+            actualizarSaldos();
+            cantidadAPagar = 0;
+            
         }
         
                
