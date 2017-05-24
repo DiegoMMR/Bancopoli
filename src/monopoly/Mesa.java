@@ -381,7 +381,7 @@ public class Mesa extends javax.swing.JFrame {
         }
         
         bancarrota(listaJugadores.get(turno-2));
-        if(listaJugadores.size() == 1)
+        if(noJugadores == 1)
         {
             JOptionPane.showMessageDialog(null, "Juego terminado");
             JOptionPane.showMessageDialog(null, "Ganador: \n" + listaJugadores.get(0).getNombre());
