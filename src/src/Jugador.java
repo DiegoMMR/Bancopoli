@@ -143,12 +143,45 @@ public class Jugador {
           
          System.out.println("Cantidad a pagar jugador: " + this.cantidadAPagar);
         
+         //Se envia a la carcel y paga Q100
         if (auxiliar == 15) {
-            JOptionPane.showMessageDialog(null, "Haz caido en la carcel, regresa y paga Q100");
+            JOptionPane.showMessageDialog(null, "Ve a la carcel y paga Q100 ");
             this.setSaldo(this.saldo - 100);
             this._Pieza.setLocation(matriz[4]);
             auxiliar = 4;
         }
+        //Al caer en cupones se genera un numero aleatorio que representa cada cupon
+        if (auxiliar == 16) {
+            int cuponNum = (int) (Math.random() * 5 + 1);
+            switch (cuponNum){
+                case 1:  cuponNum = 1;
+                    JOptionPane.showMessageDialog(null, "Haz ganado un bono de Q100");
+                    this.setSaldo(this.saldo + 100);
+                    break;
+                case 2:  cuponNum = 2;
+                    JOptionPane.showMessageDialog(null, "Haz ganado un bono de Q500");
+                    this.setSaldo(this.saldo + 500);
+                    break;
+                case 3:  cuponNum = 3;
+                    JOptionPane.showMessageDialog(null, "Debes pagar impuestos extra por un monto de Q100");
+                    this.setSaldo(this.saldo - 100);
+                    break;
+                case 4:  cuponNum = 4;
+                    JOptionPane.showMessageDialog(null, "Ve a la carcel");
+                    this.setSaldo(this.saldo - 100);
+                    this._Pieza.setLocation(matriz[4]);
+                    auxiliar = 4;
+                    break;
+                case 5:  cuponNum = 5;
+                    JOptionPane.showMessageDialog(null, "Ve al inicio y cobra Q100");
+                    this.setSaldo(this.saldo + 100);
+                    this._Pieza.setLocation(matriz[0]);
+                    auxiliar = 0;
+                    break;
+                default: break;
+            }
+        }
+        
         saldo.setText("Q. " + String.valueOf(this.saldo));
         
       
