@@ -165,6 +165,7 @@ public class Jugador {
                 case 1:  cuponNum = 1;
                     JOptionPane.showMessageDialog(null, "Avance a Izabal y pague al banco Q. 50.00 de peaje");
                     this.setSaldo(this.saldo - 50);
+                    this._Pieza.setLocation(_Cuadros.getIzabal());
                     JOptionPane.showMessageDialog(null, "Haz pasado por la salida, recibes Q100");
                     this.setSaldo(this.saldo + 100);
                     break;
