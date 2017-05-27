@@ -91,6 +91,7 @@ public class Casillas {
                 //si no le alcanza lo pone en bancarrota
                 }else
                 {
+                    JOptionPane.showMessageDialog(null, _Jugador.getNombre() + " te has quedado en bancarrota\n Hasta pronto...");
                     this.cantidadAPagar = _Jugador.getSaldo();
                     _Jugador.setBancarrota(true);
                 }
@@ -151,7 +152,9 @@ public class Casillas {
                     JOptionPane.showMessageDialog(null, "Se le descontaran Q. " + impuesto + " por impuestos");
                     _Jugador.setSaldo(saldo);
                     //si no le alcanza lo declara en bancarrota
-                    }else{_Jugador.setBancarrota(true);}
+                    }else{
+                         JOptionPane.showMessageDialog(null, _Jugador.getNombre() + " te has quedado en bancarrota\n Hasta pronto...");
+                        _Jugador.setBancarrota(true);}
                     
                    
                     

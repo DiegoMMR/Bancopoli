@@ -16,6 +16,7 @@ import src.Jugador;
 import src.Tablero;
 
 /**
+ * 
  *
  * @author dieez
  */
@@ -35,6 +36,8 @@ public class Mesa extends javax.swing.JFrame {
     private Casillas _Casillas = new Casillas();
     private Casilla matriz[] = _Casillas.getMatriz();
     private ArrayList<Jugador> listaJugadores = new ArrayList<Jugador>();
+    private int dialogButton = JOptionPane.YES_NO_OPTION;
+    private int dialogResult = 0;
     
     Jugador j1;
     Jugador j2;
@@ -76,8 +79,42 @@ public class Mesa extends javax.swing.JFrame {
        
        //hace a los jugadores seleccionar piezas
        try{ 
+            inicio();
+      
+       } catch (NumberFormatException c){
+                     
+                   JOptionPane.showMessageDialog (null, "Atencion esta agregando letras porfavor coloque un numero a seleccionar","Error",JOptionPane.ERROR_MESSAGE);
+
+           }  
+       finally{
            
-       switch (noJugadores) {
+           dialogResult = JOptionPane.showConfirmDialog(null,"¿Estan seguros de las piezas elegidas?");
+           
+           if (dialogResult == 0) {
+              System.out.println("Si");
+           
+           }else{
+                inicio();} 
+       
+       }
+        
+        agregarPiezas();
+        
+        
+        //dibuja el tablero
+        Tablero imagen = new Tablero();
+        jPanel1.add(imagen);
+        jPanel1.repaint();
+        
+        
+        //muestra mensaje de a quien le toca
+        JOptionPane.showMessageDialog(null, "Turno Jugador " + turno);
+    }
+    
+    
+    public void inicio()
+    {
+         switch (noJugadores) {
             case 1:
                 
                 j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
@@ -121,76 +158,7 @@ public class Mesa extends javax.swing.JFrame {
             default:
                 break;
         }
-       } catch (NumberFormatException c){
-                     
-                   JOptionPane.showMessageDialog (null, "Atencion esta agregando letras porfavor coloque un numero a seleccionar","Error",JOptionPane.ERROR_MESSAGE);
-
-           }  
-       finally{
-           JOptionPane.showMessageDialog (null, "¿Estan seguros de las piezas elegidas, elijan de nuevo?");
-       switch (noJugadores) {
-            case 1:
-                
-                j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
-                              
-                //llena los labes a usar
-                lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
-                
-                //vacia los labes a usar
-                lblSaldoJugador2.setText("");
-                lblJugador2.setText("");
-                lblSaldoJugador3.setText("");
-                lblJugador3.setText("");
-            
-               
-                break;
-            case 2:
-                j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
-                j2.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 2? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
-
-                lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
-                lblSaldoJugador2.setText("Q. " + String.valueOf(j2.getSaldo()));
-
-                lblSaldoJugador3.setText("");
-                lblJugador3.setText("");
-                
-                
-                break;
-            case 3:
-                j1.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 1? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
-                j2.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 2? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
-                j3.setSeleccion(Integer.valueOf(JOptionPane.showInputDialog("¿Pieza Jugador 3? \n 1. Perro \n 2. Carro \n 3. Sombrero")));
-
-                lblSaldoJugador1.setText("Q. " + String.valueOf(j1.getSaldo()));
-                lblSaldoJugador2.setText("Q. " + String.valueOf(j2.getSaldo()));
-                lblSaldoJugador3.setText("Q. " + String.valueOf(j3.getSaldo()));
-                
-                listaJugadores.add(j1);
-                listaJugadores.add(j2);
-                listaJugadores.add(j3);
-                break;
-            default:
-                break;
-                              }
-       
-       
-       }
-        
-        agregarPiezas();
-        
-        
-        //dibuja el tablero
-        Tablero imagen = new Tablero();
-        jPanel1.add(imagen);
-        jPanel1.repaint();
-        
-        
-        //muestra mensaje de a quien le toca
-        JOptionPane.showMessageDialog(null, "Turno Jugador " + turno);
     }
-    
-    
-    
    
     //agrega a los jugadores
     public void agregarPiezas() {

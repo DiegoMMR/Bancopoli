@@ -155,6 +155,7 @@ public class Jugador {
                 //si no le alcanza lo pone en bancarrota
                 }else
                 {
+                    JOptionPane.showMessageDialog(null, this.nombre + " te has quedado en bancarrota\n Hasta pronto...");
                     this.setBancarrota(true);
                 }
         }
@@ -178,6 +179,7 @@ public class Jugador {
                     //si no le alcanza lo pone en bancarrota
                     }else
                     {
+                        JOptionPane.showMessageDialog(null, this.nombre + " te has quedado en bancarrota\n Hasta pronto...");
                         this.setBancarrota(true);
                     }
                     break;
@@ -192,6 +194,7 @@ public class Jugador {
                     //si no le alcanza lo pone en bancarrota
                     }else
                     {
+                        JOptionPane.showMessageDialog(null, this.nombre + " te has quedado en bancarrota\n Hasta pronto...");
                         this.setBancarrota(true);
                     }
                     break;
